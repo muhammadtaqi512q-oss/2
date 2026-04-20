@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORE GROUP OF COMPANY | Toggle Mode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-shine: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
+            --gold-solid: #d4af37;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: serif;
+            transition: background 0.5s ease;
+        }
+
+        /* TOP RIGHT CIRCLE BUTTON (THE TOGGLE) */
+        .circle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            border: 2px solid gold;
+            box-shadow: 0 0 15px gold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            cursor: pointer;
+            z-index: 9999;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: bold;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .circle-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 25px gold;
+        }
+
+        /* --- CLASSIC DESIGN (DEFAULT) --- */
+        .gold-box {
+            background: linear-gradient(180deg, #d6a94b, #8a6025);
+            border: 6px solid #e6c26b;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px gold, inset 0 0 15px #5e3c15;
+            text-align: center;
+            margin-bottom: 50px;
+            transition: 0.5s;
+        }
+
+        .gold-text {
+            font-size: 55px;
+            font-weight: bold;
+            color: #ffdd77;
+            text-shadow: 0px 2px 2px #a67c00, 0px 4px 4px #8a6b00, 0px 6px 6px black, 0px 0px 20px gold;
+            letter-spacing: 3px;
+        }
+
+        .decor {
+            font-size: 40px;
+            color: #f0cf7a;
+            text-shadow: 0 0 10px gold;
+            margin-bottom: -20px;
+        }
+
+        .btn {
+            display: block;
+            margin: 15px auto;
+            width: 260px;
+            padding: 15px;
+            border: 2px solid red;
+            color: red;
+            background: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-family: serif;
+        }
+
+        .btn:hover {
+            background: red;
+            color: black;
+        }
+
+        /* --- NOVA DESIGN (ACTIVE STATE) --- */
+        body.nova-active {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle, #111 0%, #000 100%);
+        }
+
+        .nova-active .circle-btn {
+            background: var(--gold-shine);
+            color: black;
+            border: 1px solid white;
+        }
+
+        /* Nova Container Style */
+        .nova-active .gold-box {
+            background: #0d0d0d;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 40px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+            padding: 60px 40px;
+        }
+
+        .nova-active .gold-text {
+            font-family: 'Cinzel', serif;
+            background: var(--gold-shine);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 50px;
+            text-shadow: none;
+        }
+
+        .nova-active .decor {
+            display: none; /* Hide old stars in Nova mode */
+        }
+
+        .nova-active .btn {
+            background: var(--gold-shine);
+            border: none;
+            color: black;
+            font-weight: 700;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Adding Shine to Nova Buttons */
+        .nova-active .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+            transform: rotate(30deg);
+            animation: moveShine 3s infinite;
+        }
+
+        @keyframes moveShine {
+            0% { left: -100%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        .nova-active .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+    </style>
+</head>
+<body id="mainBody">
+
+    <div class="circle-btn" onclick="toggleDesign()">
+        <span id="btnText">NOVA<br>MODE</span>
+    </div>
+
+    <div class="gold-box">
+        <div class="decor">★ ✦ ✧ ✦ ★</div>
+        <div class="gold-text">CORE GROUP OF COMPANY</div>
+        <div class="decor">★ ✦ ✧ ✦ ★</div>
+    </div>
+
+    <button class="btn" onclick="window.open('https://www3.oneapp.dev/', '_blank')">
+        CORE WEB
+    </button>
+    <button class="btn" onclick="window.open('https://sites.google.com/view/master-ai-mt-m/home', '_blank')">
+        CORE AI
+    </button>
+    <button class="btn" onclick="window.open('https://sites.google.com/view/core-ai-developer/home', '_blank')">
+        CORE COURSES
+    </button>
+
+    <script>
+        function toggleDesign() {
+            const body = document.getElementById('mainBody');
+            const btnText = document.getElementById('btnText');
+            
+            body.classList.toggle('nova-active');
+            
+            if(body.classList.contains('nova-active')) {
+                btnText.innerHTML = "CLASSIC<br>MODE";
+            } else {
+                btnText.innerHTML = "NOVA<br>MODE";
+            }
+        }
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"e3c1c9af36de41759418005494a48906","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
