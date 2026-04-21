@@ -1,214 +1,203 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CORE GROUP OF COMPANY | Toggle Mode</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>CORE GROUP OF COMPANY | PORTAL</title>
     <style>
         :root {
-            --gold-shine: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 85%, #aa771c 100%);
-            --gold-solid: #d4af37;
+            --pink-bg: #ff7eb9;
+            --pink-dark: #ff4081;
+            --gold: #ffcc33;
+            --glass: rgba(255, 255, 255, 0.15);
+            --border: rgba(255, 255, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background: black;
+            background: linear-gradient(135deg, #ff7eb9 0%, #ff4081 100%);
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            font-family: serif;
-            transition: background 0.5s ease;
+            color: white;
         }
 
-        /* TOP RIGHT CIRCLE BUTTON (THE TOGGLE) */
-        .circle-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: red;
-            color: white;
-            border-radius: 50%;
-            border: 2px solid gold;
-            box-shadow: 0 0 15px gold;
+        /* --- Floating Autumn Leaves --- */
+        .autumn-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .leaf {
+            position: absolute;
+            border-radius: 2px 15px;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Dashboard Container --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .header-title {
+            margin-bottom: 40px;
+        }
+
+        .header-title h1 {
+            font-size: 2.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title p {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* --- Compact Button Grid --- */
+        .button-grid {
             display: flex;
             justify-content: center;
-            align-items: center;
-            font-size: 10px;
-            cursor: pointer;
-            z-index: 9999;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-weight: bold;
-            text-align: center;
-            line-height: 1;
-        }
-
-        .circle-btn:hover {
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 25px gold;
-        }
-
-        /* --- CLASSIC DESIGN (DEFAULT) --- */
-        .gold-box {
-            background: linear-gradient(180deg, #d6a94b, #8a6025);
-            border: 6px solid #e6c26b;
-            padding: 40px 60px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px gold, inset 0 0 15px #5e3c15;
-            text-align: center;
+            gap: 20px;
+            flex-wrap: wrap;
             margin-bottom: 50px;
-            transition: 0.5s;
         }
 
-        .gold-text {
-            font-size: 55px;
-            font-weight: bold;
-            color: #ffdd77;
-            text-shadow: 0px 2px 2px #a67c00, 0px 4px 4px #8a6b00, 0px 6px 6px black, 0px 0px 20px gold;
-            letter-spacing: 3px;
-        }
-
-        .decor {
-            font-size: 40px;
-            color: #f0cf7a;
-            text-shadow: 0 0 10px gold;
-            margin-bottom: -20px;
-        }
-
-        .btn {
-            display: block;
-            margin: 15px auto;
-            width: 260px;
-            padding: 15px;
-            border: 2px solid red;
-            color: red;
-            background: none;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
-            font-family: serif;
-        }
-
-        .btn:hover {
-            background: red;
-            color: black;
-        }
-
-        /* --- NOVA DESIGN (ACTIVE STATE) --- */
-        body.nova-active {
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle, #111 0%, #000 100%);
-        }
-
-        .nova-active .circle-btn {
-            background: var(--gold-shine);
-            color: black;
-            border: 1px solid white;
-        }
-
-        /* Nova Container Style */
-        .nova-active .gold-box {
-            background: #0d0d0d;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 40px;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
-            padding: 60px 40px;
-        }
-
-        .nova-active .gold-text {
-            font-family: 'Cinzel', serif;
-            background: var(--gold-shine);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 50px;
-            text-shadow: none;
-        }
-
-        .nova-active .decor {
-            display: none; /* Hide old stars in Nova mode */
-        }
-
-        .nova-active .btn {
-            background: var(--gold-shine);
-            border: none;
-            color: black;
-            font-weight: 700;
+        .cyber-btn {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            width: 220px; 
             border-radius: 15px;
-            font-family: 'Poppins', sans-serif;
-            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cyber-btn:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: var(--gold);
+        }
+
+        .icon { font-size: 1.6rem; filter: drop-shadow(0 0 5px var(--gold)); }
+        .btn-text { font-size: 0.8rem; font-weight: 700; letter-spacing: 1.2px; }
+
+        /* --- LinkedIn Footer --- */
+        .footer {
             position: relative;
-            overflow: hidden;
+            z-index: 20;
+            margin-top: 20px;
         }
 
-        /* Adding Shine to Nova Buttons */
-        .nova-active .btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 100%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
-            transform: rotate(30deg);
-            animation: moveShine 3s infinite;
+        .linkedin-link {
+            background: rgba(0, 119, 181, 0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
         }
 
-        @keyframes moveShine {
-            0% { left: -100%; }
-            20% { left: 150%; }
-            100% { left: 150%; }
-        }
-
-        .nova-active .btn:hover {
+        .linkedin-link:hover {
+            background: rgba(0, 119, 181, 0.8);
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 20px rgba(0, 119, 181, 0.4);
         }
 
+        @media (max-width: 600px) {
+            .header-title h1 { font-size: 1.8rem; }
+            .cyber-btn { width: 100%; }
+        }
     </style>
 </head>
-<body id="mainBody">
+<body>
 
-    <div class="circle-btn" onclick="toggleDesign()">
-        <span id="btnText">NOVA<br>MODE</span>
+    <div class="autumn-bg" id="leafBox"></div>
+
+    <div class="container">
+        <div class="header-title">
+            <h1>CORE GROUP OF COMPANY</h1>
+            <p>Elegance In AI</p>
+        </div>
+
+        <div class="button-grid">
+            <a href="https://muhammadtaqi512q-oss.github.io/2/CGC" class="cyber-btn">
+                <div class="icon">🏛️</div>
+                <div class="btn-text">MAIN COMPANY</div>
+            </a>
+            <a href="https://muhammadtaqi512q-oss.github.io/2/CV" class="cyber-btn">
+                <div class="icon">📄</div>
+                <div class="btn-text">CV BUILDER</div>
+            </a>
+            <a href="https://muhammadtaqi512q-oss.github.io/2/AI" class="cyber-btn">
+                <div class="icon">🎙️</div>
+                <div class="btn-text">VOICE AI STUDIO</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <a href="https://www.linkedin.com/in/%EA%A7%81%E0%BC%92muhammad-taqi%E0%BC%92%EA%A7%82-04509b3a4/" target="_blank" class="linkedin-link">
+                <span>Connect with Muhammad Taqi on LinkedIn</span> ➔
+            </a>
+        </div>
     </div>
-
-    <div class="gold-box">
-        <div class="decor">★ ✦ ✧ ✦ ★</div>
-        <div class="gold-text">CORE GROUP OF COMPANY</div>
-        <div class="decor">★ ✦ ✧ ✦ ★</div>
-    </div>
-
-    <button class="btn" onclick="window.open('https://www3.oneapp.dev/', '_blank')">
-        CORE WEB
-    </button>
-    <button class="btn" onclick="window.open('https://sites.google.com/view/master-ai-mt-m/home', '_blank')">
-        CORE AI
-    </button>
-    <button class="btn" onclick="window.open('https://sites.google.com/view/core-ai-developer/home', '_blank')">
-        CORE COURSES
-    </button>
 
     <script>
-        function toggleDesign() {
-            const body = document.getElementById('mainBody');
-            const btnText = document.getElementById('btnText');
-            
-            body.classList.toggle('nova-active');
-            
-            if(body.classList.contains('nova-active')) {
-                btnText.innerHTML = "CLASSIC<br>MODE";
-            } else {
-                btnText.innerHTML = "NOVA<br>MODE";
-            }
+        const leafBox = document.getElementById('leafBox');
+        for (let i = 0; i < 40; i++) {
+            const leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            const size = Math.random() * 10 + 8 + 'px';
+            leaf.style.width = size;
+            leaf.style.height = size;
+            leaf.style.left = Math.random() * 100 + 'vw';
+            leaf.style.background = Math.random() > 0.5 ? '#fff' : '#ffcc33';
+            leaf.style.animationDuration = Math.random() * 5 + 4 + 's';
+            leaf.style.animationDelay = Math.random() * 5 + 's';
+            leafBox.appendChild(leaf);
         }
     </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"e3c1c9af36de41759418005494a48906","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
